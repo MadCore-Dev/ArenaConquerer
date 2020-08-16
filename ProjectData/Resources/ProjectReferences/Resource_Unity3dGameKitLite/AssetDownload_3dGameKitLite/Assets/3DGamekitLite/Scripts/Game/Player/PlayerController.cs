@@ -9,6 +9,9 @@ namespace Gamekit3D
     [RequireComponent(typeof(Animator))]
     public class PlayerController : MonoBehaviour, IMessageReceiver
     {
+        public Animator cubeCharacterAnimator;
+        bool jump = false;
+
         protected static PlayerController s_Instance;
         public static PlayerController instance { get { return s_Instance; } }
 
@@ -146,6 +149,8 @@ namespace Gamekit3D
             m_Animator = GetComponent<Animator>();
             m_CharCtrl = GetComponent<CharacterController>();
 
+            cubeCharacterAnimator = transform.GetChild(0).GetComponent<Animator>();
+
             meleeWeapon.SetOwner(gameObject);
 
             s_Instance = this;
@@ -188,10 +193,12 @@ namespace Gamekit3D
 
             m_Animator.SetFloat(m_HashStateTime, Mathf.Repeat(m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1f));
             m_Animator.ResetTrigger(m_HashMeleeAttack);
-
+            cubeCharacterAnimator.ResetTrigger("lightAttack");
             if (m_Input.Attack && canAttack)
+            {
                 m_Animator.SetTrigger(m_HashMeleeAttack);
-
+                cubeCharacterAnimator.SetTrigger("lightAttack");
+            }
             CalculateForwardMovement();
             CalculateVerticalMovement();
 
@@ -246,7 +253,10 @@ namespace Gamekit3D
             m_InCombo = equip;
 
             if (!equip)
+            {
                 m_Animator.ResetTrigger(m_HashMeleeAttack);
+                cubeCharacterAnimator.ResetTrigger("lightAttack");
+            }
         }
 
         // Called each physics step.
@@ -268,6 +278,7 @@ namespace Gamekit3D
 
             // Set the animator parameter to control what animation is being played.
             m_Animator.SetFloat(m_HashForwardSpeed, m_ForwardSpeed);
+            cubeCharacterAnimator.SetFloat("speed", m_ForwardSpeed);
         }
 
         // Called each physics step.
@@ -306,7 +317,7 @@ namespace Gamekit3D
                 {
                     m_VerticalSpeed = 0f;
                 }
-                
+
                 // If Ellen is airborne, apply gravity.
                 m_VerticalSpeed -= gravity * Time.deltaTime;
             }
@@ -318,13 +329,13 @@ namespace Gamekit3D
             // Create three variables, move input local to the player, flattened forward direction of the camera and a local target rotation.
             Vector2 moveInput = m_Input.MoveInput;
             Vector3 localMovementDirection = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
-            
+
             Vector3 forward = Quaternion.Euler(0f, cameraSettings.Current.m_XAxis.Value, 0f) * Vector3.forward;
             forward.y = 0f;
             forward.Normalize();
 
             Quaternion targetRotation;
-            
+
             // If the local movement direction is the opposite of forward then the target rotation should be towards the camera.
             if (Mathf.Approximately(Vector3.Dot(localMovementDirection, Vector3.forward), -1.0f))
             {
@@ -379,7 +390,7 @@ namespace Gamekit3D
                 {
                     // The desired forward is the direction to the closest enemy.
                     resultingForward = closestForward;
-                    
+
                     // We also directly set the rotation, as we want snappy fight and orientation isn't updated in the UpdateOrientation function during an atatck.
                     transform.rotation = Quaternion.LookRotation(resultingForward);
                 }
@@ -504,7 +515,7 @@ namespace Gamekit3D
                 {
                     // ... and get the movement of the root motion rotated to lie along the plane of the ground.
                     movement = Vector3.ProjectOnPlane(m_Animator.deltaPosition, hit.normal);
-                    
+
                     // Also store the current walking surface so the correct audio is played.
                     Renderer groundRenderer = hit.collider.GetComponentInChildren<Renderer>();
                     m_CurrentWalkingSurface = groundRenderer ? groundRenderer.sharedMaterial : null;
@@ -534,16 +545,26 @@ namespace Gamekit3D
 
             // After the movement store whether or not the character controller is grounded.
             m_IsGrounded = m_CharCtrl.isGrounded;
+            if (m_IsGrounded)
+            {
+                jump = false;
+            }
 
             // If Ellen is not on the ground then send the vertical speed to the animator.
             // This is so the vertical speed is kept when landing so the correct landing animation is played.
             if (!m_IsGrounded)
                 m_Animator.SetFloat(m_HashAirborneVerticalSpeed, m_VerticalSpeed);
 
+            if (!m_IsGrounded && !jump)
+            {
+                jump = true;
+                cubeCharacterAnimator.SetTrigger("jump");
+            }
+
             // Send whether or not Ellen is on the ground to the animator.
             m_Animator.SetBool(m_HashGrounded, m_IsGrounded);
         }
-        
+
         // This is called by an animation event when Ellen swings her staff.
         public void MeleeAttackStart(int throwing = 0)
         {
@@ -570,7 +591,7 @@ namespace Gamekit3D
         {
             StartCoroutine(RespawnRoutine());
         }
-        
+
         protected IEnumerator RespawnRoutine()
         {
             // Wait for the animator to be transitioning from the EllenDeath state.
@@ -578,7 +599,7 @@ namespace Gamekit3D
             {
                 yield return null;
             }
-            
+
             // Wait for the screen to fade out.
             yield return StartCoroutine(ScreenFader.FadeSceneOut());
             while (ScreenFader.IsFading)
@@ -600,17 +621,17 @@ namespace Gamekit3D
             {
                 Debug.LogError("There is no Checkpoint set, there should always be a checkpoint set. Did you add a checkpoint at the spawn?");
             }
-            
+
             // Set the Respawn parameter of the animator.
             m_Animator.SetTrigger(m_HashRespawn);
-            
+
             // Start the respawn graphic effects.
             spawn.StartEffect();
-            
+
             // Wait for the screen to fade in.
             // Currently it is not important to yield here but should some changes occur that require waiting until a respawn has finished this will be required.
             yield return StartCoroutine(ScreenFader.FadeSceneIn());
-            
+
             m_Damageable.ResetDamage();
         }
 
@@ -618,7 +639,7 @@ namespace Gamekit3D
         public void RespawnFinished()
         {
             m_Respawning = false;
-            
+
             //we set the damageable invincible so we can't get hurt just after being respawned (feel like a double punitive)
             m_Damageable.isInvulnerable = false;
         }
