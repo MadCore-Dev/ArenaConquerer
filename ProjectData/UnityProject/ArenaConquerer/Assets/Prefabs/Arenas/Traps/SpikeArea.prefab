@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 6522294917483513881}
   - component: {fileID: 6555161045375508570}
   - component: {fileID: 4005714458006359800}
+  - component: {fileID: 1506345214297170415}
   m_Layer: 0
   m_Name: SpikeArea
   m_TagString: Untagged
@@ -260,6 +261,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1506345214297170415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3503960980573060860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681e0672bf222cf46a905ee7da3eeafe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition: 1.5
+  delayBeforeHide: 1
+  alwaysAnimating: 0
+  spikes:
+  - {fileID: 4722210312923878853}
+  - {fileID: 2392045129646719930}
+  - {fileID: 7113936639041009328}
+  - {fileID: 3480772040811022918}
+  - {fileID: 7690768888607833912}
+  - {fileID: 7266623072590164236}
+  - {fileID: 3269096750642405815}
+  - {fileID: 4257812147645121247}
+  - {fileID: 6727845586276342162}
 --- !u!1 &4423822113576687279
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,8 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3461312856433552065}
+  - component: {fileID: 3834740264894473068}
   - component: {fileID: 8745404026453481438}
   - component: {fileID: 475992909276808183}
+  - component: {fileID: 6616241509567604715}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -32,6 +34,19 @@ Transform:
   m_Father: {fileID: 3679495197298617930}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &3834740264894473068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20040512868233130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafb655eb6a090246ada57cff30935c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoPlay: 1
 --- !u!198 &8745404026453481438
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4754,6 +4769,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!135 &6616241509567604715
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20040512868233130}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 1.0000001}
 --- !u!1 &4401370052166078583
 GameObject:
   m_ObjectHideFlags: 0
@@ -4796,7 +4824,6 @@ GameObject:
   - component: {fileID: 5021653186071299047}
   - component: {fileID: 5021653186071299040}
   - component: {fileID: 5021653186071299041}
-  - component: {fileID: 5021653186071299042}
   m_Layer: 0
   m_Name: Pressure_Thrower
   m_TagString: Untagged
@@ -4866,16 +4893,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &5021653186071299042
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5021653186071299043}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
