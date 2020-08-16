@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 354946145304582290}
   - component: {fileID: 3018585349074594763}
   - component: {fileID: 6045767541642355178}
+  - component: {fileID: 3318108420645278107}
   m_Layer: 0
   m_Name: Bash_Piller
   m_TagString: Untagged
@@ -102,6 +103,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &3318108420645278107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3625928251744576503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bcd4e12e70be434db1ed472c89e5cfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &409077505448422860
 PrefabInstance:
   m_ObjectHideFlags: 0
