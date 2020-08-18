@@ -2,6 +2,7 @@ using UnityEngine;
 using Gamekit3D.Message;
 using System.Collections;
 using UnityEngine.XR.WSA;
+using DG.Tweening;
 
 namespace Gamekit3D
 {
@@ -25,15 +26,18 @@ namespace Gamekit3D
         public float idleTimeout = 5f;            // How long before Ellen starts considering random idles.
         public bool canAttack;                    // Whether or not Ellen can swing her staff.
 
+        public float maxWarpDistance = 5f;
+        public float maxWarpDuration = .5f;
+
         public CameraSettings cameraSettings;            // Reference used to determine the camera's direction.
         public MeleeWeapon meleeWeapon;                  // Reference used to (de)activate the staff when attacking. 
-        public RandomAudioPlayer footstepPlayer;         // Random Audio Players used for various situations.
-        public RandomAudioPlayer hurtAudioPlayer;
-        public RandomAudioPlayer landingPlayer;
-        public RandomAudioPlayer emoteLandingPlayer;
-        public RandomAudioPlayer emoteDeathPlayer;
-        public RandomAudioPlayer emoteAttackPlayer;
-        public RandomAudioPlayer emoteJumpPlayer;
+        //public RandomAudioPlayer footstepPlayer;         // Random Audio Players used for various situations.
+        //public RandomAudioPlayer hurtAudioPlayer;
+        //public RandomAudioPlayer landingPlayer;
+        //public RandomAudioPlayer emoteLandingPlayer;
+        //public RandomAudioPlayer emoteDeathPlayer;
+        //public RandomAudioPlayer emoteAttackPlayer;
+        //public RandomAudioPlayer emoteJumpPlayer;
 
         protected AnimatorStateInfo m_CurrentStateInfo;    // Information about the base layer of the animator cached.
         protected AnimatorStateInfo m_NextStateInfo;
@@ -119,16 +123,16 @@ namespace Gamekit3D
             meleeWeapon = GetComponentInChildren<MeleeWeapon>();
 
             Transform footStepSource = transform.Find("FootstepSource");
-            if (footStepSource != null)
-                footstepPlayer = footStepSource.GetComponent<RandomAudioPlayer>();
+            //if (footStepSource != null)
+            //    footstepPlayer = footStepSource.GetComponent<RandomAudioPlayer>();
 
-            Transform hurtSource = transform.Find("HurtSource");
-            if (hurtSource != null)
-                hurtAudioPlayer = hurtSource.GetComponent<RandomAudioPlayer>();
+            //Transform hurtSource = transform.Find("HurtSource");
+            //if (hurtSource != null)
+            //    hurtAudioPlayer = hurtSource.GetComponent<RandomAudioPlayer>();
 
-            Transform landingSource = transform.Find("LandingSource");
-            if (landingSource != null)
-                landingPlayer = landingSource.GetComponent<RandomAudioPlayer>();
+            //Transform landingSource = transform.Find("LandingSource");
+            //if (landingSource != null)
+            //    landingPlayer = landingSource.GetComponent<RandomAudioPlayer>();
 
             cameraSettings = FindObjectOfType<CameraSettings>();
 
@@ -207,7 +211,7 @@ namespace Gamekit3D
             if (IsOrientationUpdated() && IsMoveInput)
                 UpdateOrientation();
 
-            PlayAudio();
+            //PlayAudio();
 
             TimeoutToIdle();
 
@@ -279,6 +283,36 @@ namespace Gamekit3D
             // Set the animator parameter to control what animation is being played.
             m_Animator.SetFloat(m_HashForwardSpeed, m_ForwardSpeed);
             cubeCharacterAnimator.SetFloat("speed", m_ForwardSpeed);
+        }
+
+        private void Update()
+        {
+            if (m_Input.WarpInput)
+            {
+                CalculateWarpMovement();
+            }
+            Debug.DrawRay(transform.position + transform.up * 0.5f + transform.forward * .5f, transform.forward, Color.red);
+        }
+
+        // Called each physics step.
+        void CalculateWarpMovement()
+        {
+
+            Vector3 warpDestination;
+            // ... raycast into the ground...
+            RaycastHit hit;
+            Ray ray = new Ray(transform.position + transform.up * 0.5f + transform.forward * .5f, transform.forward);
+            if (Physics.Raycast(ray, out hit, maxWarpDistance))
+            {
+                Debug.Log("hit target: " + hit.collider.name);
+                warpDestination = hit.point + (transform.position - hit.point).normalized * .5f;
+            }
+            else
+            {
+                warpDestination = transform.position + transform.forward * maxWarpDistance;
+            }
+
+            transform.DOMove(warpDestination, maxWarpDuration);
         }
 
         // Called each physics step.
@@ -427,55 +461,55 @@ namespace Gamekit3D
             transform.rotation = m_TargetRotation;
         }
 
-        // Called each physics step to check if audio should be played and if so instruct the relevant random audio player to do so.
-        void PlayAudio()
-        {
-            float footfallCurve = m_Animator.GetFloat(m_HashFootFall);
+        //// Called each physics step to check if audio should be played and if so instruct the relevant random audio player to do so.
+        //void PlayAudio()
+        //{
+        //    float footfallCurve = m_Animator.GetFloat(m_HashFootFall);
 
-            if (footfallCurve > 0.01f && !footstepPlayer.playing && footstepPlayer.canPlay)
-            {
-                footstepPlayer.playing = true;
-                footstepPlayer.canPlay = false;
-                footstepPlayer.PlayRandomClip(m_CurrentWalkingSurface, m_ForwardSpeed < 4 ? 0 : 1);
-            }
-            else if (footstepPlayer.playing)
-            {
-                footstepPlayer.playing = false;
-            }
-            else if (footfallCurve < 0.01f && !footstepPlayer.canPlay)
-            {
-                footstepPlayer.canPlay = true;
-            }
+        //    if (footfallCurve > 0.01f && !footstepPlayer.playing && footstepPlayer.canPlay)
+        //    {
+        //        footstepPlayer.playing = true;
+        //        footstepPlayer.canPlay = false;
+        //        footstepPlayer.PlayRandomClip(m_CurrentWalkingSurface, m_ForwardSpeed < 4 ? 0 : 1);
+        //    }
+        //    else if (footstepPlayer.playing)
+        //    {
+        //        footstepPlayer.playing = false;
+        //    }
+        //    else if (footfallCurve < 0.01f && !footstepPlayer.canPlay)
+        //    {
+        //        footstepPlayer.canPlay = true;
+        //    }
 
-            if (m_IsGrounded && !m_PreviouslyGrounded)
-            {
-                landingPlayer.PlayRandomClip(m_CurrentWalkingSurface, bankId: m_ForwardSpeed < 4 ? 0 : 1);
-                emoteLandingPlayer.PlayRandomClip();
-            }
+        //    if (m_IsGrounded && !m_PreviouslyGrounded)
+        //    {
+        //        landingPlayer.PlayRandomClip(m_CurrentWalkingSurface, bankId: m_ForwardSpeed < 4 ? 0 : 1);
+        //        emoteLandingPlayer.PlayRandomClip();
+        //    }
 
-            if (!m_IsGrounded && m_PreviouslyGrounded && m_VerticalSpeed > 0f)
-            {
-                emoteJumpPlayer.PlayRandomClip();
-            }
+        //    if (!m_IsGrounded && m_PreviouslyGrounded && m_VerticalSpeed > 0f)
+        //    {
+        //        emoteJumpPlayer.PlayRandomClip();
+        //    }
 
-            if (m_CurrentStateInfo.shortNameHash == m_HashHurt && m_PreviousCurrentStateInfo.shortNameHash != m_HashHurt)
-            {
-                hurtAudioPlayer.PlayRandomClip();
-            }
+        //    if (m_CurrentStateInfo.shortNameHash == m_HashHurt && m_PreviousCurrentStateInfo.shortNameHash != m_HashHurt)
+        //    {
+        //        hurtAudioPlayer.PlayRandomClip();
+        //    }
 
-            if (m_CurrentStateInfo.shortNameHash == m_HashEllenDeath && m_PreviousCurrentStateInfo.shortNameHash != m_HashEllenDeath)
-            {
-                emoteDeathPlayer.PlayRandomClip();
-            }
+        //    if (m_CurrentStateInfo.shortNameHash == m_HashEllenDeath && m_PreviousCurrentStateInfo.shortNameHash != m_HashEllenDeath)
+        //    {
+        //        emoteDeathPlayer.PlayRandomClip();
+        //    }
 
-            if (m_CurrentStateInfo.shortNameHash == m_HashEllenCombo1 && m_PreviousCurrentStateInfo.shortNameHash != m_HashEllenCombo1 ||
-                m_CurrentStateInfo.shortNameHash == m_HashEllenCombo2 && m_PreviousCurrentStateInfo.shortNameHash != m_HashEllenCombo2 ||
-                m_CurrentStateInfo.shortNameHash == m_HashEllenCombo3 && m_PreviousCurrentStateInfo.shortNameHash != m_HashEllenCombo3 ||
-                m_CurrentStateInfo.shortNameHash == m_HashEllenCombo4 && m_PreviousCurrentStateInfo.shortNameHash != m_HashEllenCombo4)
-            {
-                emoteAttackPlayer.PlayRandomClip();
-            }
-        }
+        //    if (m_CurrentStateInfo.shortNameHash == m_HashEllenCombo1 && m_PreviousCurrentStateInfo.shortNameHash != m_HashEllenCombo1 ||
+        //        m_CurrentStateInfo.shortNameHash == m_HashEllenCombo2 && m_PreviousCurrentStateInfo.shortNameHash != m_HashEllenCombo2 ||
+        //        m_CurrentStateInfo.shortNameHash == m_HashEllenCombo3 && m_PreviousCurrentStateInfo.shortNameHash != m_HashEllenCombo3 ||
+        //        m_CurrentStateInfo.shortNameHash == m_HashEllenCombo4 && m_PreviousCurrentStateInfo.shortNameHash != m_HashEllenCombo4)
+        //    {
+        //        emoteAttackPlayer.PlayRandomClip();
+        //    }
+        //}
 
         // Called each physics step to count up to the point where Ellen considers a random idle.
         void TimeoutToIdle()
@@ -683,11 +717,11 @@ namespace Gamekit3D
             // Shake the camera.
             CameraShake.Shake(CameraShake.k_PlayerHitShakeAmount, CameraShake.k_PlayerHitShakeTime);
 
-            // Play an audio clip of being hurt.
-            if (hurtAudioPlayer != null)
-            {
-                hurtAudioPlayer.PlayRandomClip();
-            }
+            //// Play an audio clip of being hurt.
+            //if (hurtAudioPlayer != null)
+            //{
+            //    hurtAudioPlayer.PlayRandomClip();
+            //}
         }
 
         // Called by OnReceiveMessage and by DeathVolumes in the scene.
