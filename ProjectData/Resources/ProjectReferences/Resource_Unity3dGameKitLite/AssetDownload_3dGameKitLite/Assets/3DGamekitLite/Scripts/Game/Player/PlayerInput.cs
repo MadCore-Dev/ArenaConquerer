@@ -23,11 +23,13 @@ public class PlayerInput : MonoBehaviour
     protected bool m_Pause;
     protected bool m_ExternalInputBlocked;
 
+    protected bool m_warp;
+
     public Vector2 MoveInput
     {
         get
         {
-            if(playerControllerInputBlocked || m_ExternalInputBlocked)
+            if (playerControllerInputBlocked || m_ExternalInputBlocked)
                 return Vector2.zero;
             return m_Movement;
         }
@@ -37,7 +39,7 @@ public class PlayerInput : MonoBehaviour
     {
         get
         {
-            if(playerControllerInputBlocked || m_ExternalInputBlocked)
+            if (playerControllerInputBlocked || m_ExternalInputBlocked)
                 return Vector2.zero;
             return m_Camera;
         }
@@ -46,6 +48,12 @@ public class PlayerInput : MonoBehaviour
     public bool JumpInput
     {
         get { return m_Jump && !playerControllerInputBlocked && !m_ExternalInputBlocked; }
+    }
+
+    public bool WarpInput
+    {
+        get { return m_warp && !playerControllerInputBlocked && !m_ExternalInputBlocked; }
+        //set => m_warp = value;
     }
 
     public bool Attack
@@ -79,6 +87,7 @@ public class PlayerInput : MonoBehaviour
         m_Movement.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         m_Camera.Set(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         m_Jump = Input.GetButton("Jump");
+        m_warp = Input.GetButtonDown("Fire2");
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -88,7 +97,7 @@ public class PlayerInput : MonoBehaviour
             m_AttackWaitCoroutine = StartCoroutine(AttackWait());
         }
 
-        m_Pause = Input.GetButtonDown ("Pause");
+        m_Pause = Input.GetButtonDown("Pause");
     }
 
     IEnumerator AttackWait()
