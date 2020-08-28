@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5743631508503544230}
   - component: {fileID: 2867078035303107256}
   - component: {fileID: 4112760032017057408}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tower_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8948961999203923124}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlocksHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 6198491640299362051}
   - component: {fileID: 6023100627095645219}
   - component: {fileID: 3545825924726339918}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tower_0 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 2043000638578849938}
   - component: {fileID: 7913749018471358500}
   - component: {fileID: 7066437731324744853}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tower_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 2567845317045277960}
   - component: {fileID: 8066776481204805806}
   - component: {fileID: 7037574757470597084}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 5254394262887538046}
   - component: {fileID: 2060955662059771744}
   - component: {fileID: 4954945480008060322}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +507,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4303875772776683806}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TowerHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 7457544954423286064}
   - component: {fileID: 6653243133024958728}
   - component: {fileID: 2234725920935177259}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Moving_Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 4831426495424822921}
   - component: {fileID: 4939280068282656208}
   - component: {fileID: 6551343641334276406}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -730,7 +730,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5097789101377371027}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MovingBlocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 5187511214545896665}
   - component: {fileID: 55380683069123323}
   - component: {fileID: 4573686558827241291}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JoiningBlock_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -858,7 +858,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1011404315589163127}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ObstaclesHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -897,7 +897,7 @@ GameObject:
   - component: {fileID: 1434770280631842468}
   - component: {fileID: 4319128889523319065}
   - component: {fileID: 433937520176094610}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -991,7 +991,7 @@ GameObject:
   - component: {fileID: 7574249752404006737}
   - component: {fileID: 7852000619051443955}
   - component: {fileID: 1875842345104294819}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Blocks (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1085,7 +1085,7 @@ GameObject:
   - component: {fileID: 3760550845830063654}
   - component: {fileID: 3760550845830063705}
   - component: {fileID: 8002863673040811830}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Parkour_Arena
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1213,7 +1213,7 @@ GameObject:
   - component: {fileID: 395773423512342859}
   - component: {fileID: 4563710545604552916}
   - component: {fileID: 4428147562303359571}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Blocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1306,7 +1306,7 @@ GameObject:
   - component: {fileID: 10927202853881128}
   - component: {fileID: 1336849166155202611}
   - component: {fileID: 7274693681456314671}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tower_0 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1399,7 +1399,7 @@ GameObject:
   - component: {fileID: 6660696922348437141}
   - component: {fileID: 3599054067463011950}
   - component: {fileID: 3613368238638672515}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1492,7 +1492,7 @@ GameObject:
   - component: {fileID: 7352189483293530252}
   - component: {fileID: 8508354401717534052}
   - component: {fileID: 7991028427866813932}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1585,7 +1585,7 @@ GameObject:
   - component: {fileID: 3853287219172671619}
   - component: {fileID: 7159735652762944644}
   - component: {fileID: 1486516114541667208}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ReSpawnCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1678,7 +1678,7 @@ GameObject:
   - component: {fileID: 3069424454442338886}
   - component: {fileID: 8083552046054419440}
   - component: {fileID: 597453487862698877}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ReSpawnCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1771,7 +1771,7 @@ GameObject:
   - component: {fileID: 3993156165343121048}
   - component: {fileID: 4619570306564904294}
   - component: {fileID: 208567164600295601}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tower_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1861,7 +1861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9081290408852591981}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Piston Towers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1897,7 +1897,7 @@ GameObject:
   - component: {fileID: 1530092980104565313}
   - component: {fileID: 2511238826823932481}
   - component: {fileID: 2389410322466049017}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1987,7 +1987,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2357295670055705218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArenaLimitWalls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2024,7 +2024,7 @@ GameObject:
   - component: {fileID: 4860013608644732518}
   - component: {fileID: 1772534475312117360}
   - component: {fileID: 2006640398662805380}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2117,7 +2117,7 @@ GameObject:
   - component: {fileID: 1338331314305246103}
   - component: {fileID: 8633359289783001839}
   - component: {fileID: 5974533110258381156}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Blocks (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2207,7 +2207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2239792716019539528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MovingTowers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2242,7 +2242,7 @@ GameObject:
   - component: {fileID: 5975757650014266464}
   - component: {fileID: 8221287721863386678}
   - component: {fileID: 5944793962971957192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tower_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2335,7 +2335,7 @@ GameObject:
   - component: {fileID: 551361096282341797}
   - component: {fileID: 7757818365669957851}
   - component: {fileID: 6650259458670766523}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2428,7 +2428,7 @@ GameObject:
   - component: {fileID: 7482795229581812294}
   - component: {fileID: 5212385756859539115}
   - component: {fileID: 1964087689904317029}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2521,7 +2521,7 @@ GameObject:
   - component: {fileID: 2771555322329694282}
   - component: {fileID: 7559477229966673341}
   - component: {fileID: 3594684650351523970}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2614,7 +2614,7 @@ GameObject:
   - component: {fileID: 4240109570423497741}
   - component: {fileID: 3261627340548146907}
   - component: {fileID: 750021327346709216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JoiningBlock_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2707,7 +2707,7 @@ GameObject:
   - component: {fileID: 4831463490554086090}
   - component: {fileID: 2974131206132296607}
   - component: {fileID: 3256467216532792400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Moving_Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}

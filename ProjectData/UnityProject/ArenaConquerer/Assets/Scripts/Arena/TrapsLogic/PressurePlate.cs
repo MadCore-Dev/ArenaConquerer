@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
-public class PressurePlate : MonoBehaviour
+public class PressurePlate : Damage
 {
     [SerializeField] private bool autoPlay = false;
 
-    private ParticleSystem smoke;
+    [SerializeField] private ParticleSystem smoke;
     private string objectTag = null;
+    private const float damage = 5f;
 
     private void Start()
     {
-        smoke = GetComponent<ParticleSystem>();
         PlayPS();
     }
 
@@ -19,6 +19,11 @@ public class PressurePlate : MonoBehaviour
         if (collision.collider.tag == objectTag)
         {
             PlayPS();
+        }
+
+        if (collision.transform.tag == "Player")
+        {
+            DamageToPlayer(damage, collision.transform.GetComponent<Health>());
         }
     }
 

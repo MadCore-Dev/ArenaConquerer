@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
+  smoke: {fileID: 8745404026453481438}
 --- !u!198 &8745404026453481438
 ParticleSystem:
   m_ObjectHideFlags: 0
