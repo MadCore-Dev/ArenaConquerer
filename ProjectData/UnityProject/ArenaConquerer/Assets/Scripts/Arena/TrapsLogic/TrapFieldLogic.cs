@@ -2,7 +2,7 @@
 using DG.Tweening;
 using System.Collections.Generic;
 
-public class TrapFieldLogic : MonoBehaviour
+public class TrapFieldLogic : Damage
 {
     [SerializeField] private float targetPosition = 0;
     [SerializeField] private float delayBeforeHide = 0f;
@@ -10,13 +10,14 @@ public class TrapFieldLogic : MonoBehaviour
 
     [SerializeField] private List<Transform> spikes = new List<Transform>();
     private string tagName = null;
+    private const float damage = 5f;
 
     Sequence spikeAnimate;
 
     private void Start()
     {
         DOTween.Init();
-        
+
         for (int i = 0; i < spikes.Count; i++)
         {
             spikeAnimate = DOTween.Sequence();
@@ -35,13 +36,19 @@ public class TrapFieldLogic : MonoBehaviour
     {
         if (!alwaysAnimating)
         {
-            if (collision.collider.tag == tagName)
+            if (collision.gameObject.tag == tagName) // tagName will be player Tag
             {
                 for (int i = 0; i < spikes.Count; i++)
                 {
-                    AnimateSpike(targetPosition, spikes[i].position.y,spikes[i]);
+                    AnimateSpike(targetPosition, spikes[i].position.y, spikes[i]);
                 }
             }
+        }
+        
+
+        if (collision.gameObject.tag == "Player")
+        {
+            DamageToPlayer(damage, collision.transform.GetComponent<Health>());
         }
     }
     /// <summary>

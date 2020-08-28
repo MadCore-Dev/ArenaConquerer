@@ -5,13 +5,12 @@ using DG.Tweening;
 /// Only added rough loop rotating logic
 /// Will added better rotation logic in next step
 /// </summary>
-public class BashPiller : MonoBehaviour
+public class BashPiller : Damage
 {
-    private Sequence pillerSequence;
+    private const float damage = 5f;
     private void Start()
     {
         DOTween.Init();
-        pillerSequence = DOTween.Sequence();
 
         LoopRotate();
     }
@@ -20,5 +19,13 @@ public class BashPiller : MonoBehaviour
     {
         transform.DORotate(new Vector3(0, 360, 0), 1f ,RotateMode.FastBeyond360).SetLoops(-1);    
     }
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            DamageToPlayer(damage, collision.transform.GetComponent<Health>());
+        }
+    }
+
 }

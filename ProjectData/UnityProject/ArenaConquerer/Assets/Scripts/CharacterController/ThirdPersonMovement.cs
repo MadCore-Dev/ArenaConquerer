@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ThirdPersonMovement : MonoBehaviour
@@ -19,9 +20,30 @@ public class ThirdPersonMovement : MonoBehaviour
     private bool isPlayerOnGround;
     private Vector3 playerJumpVelocity;
 
-    // Update is called once per frame
+    #region HP TESTING
+    [Header("HP REGION")]
+    public TextMeshProUGUI logText;
+    private Health healthRef;
+    #endregion
+
+    private void Start()
+    {
+        healthRef = GetComponent<Health>();
+        if (healthRef != null)
+        {
+            healthRef.SetTotalHealth(100f);
+            logText.text = healthRef.GetRemainingHealth().ToString();
+        }
+    }
+
     void Update()
     {
+        if (logText.text != healthRef.GetRemainingHealth().ToString())
+        {
+            //  logText.text = healthRef.DamageHealth(healthRef.GetRemainingHealth() * 0.1f).ToString();
+            logText.text = healthRef.GetRemainingHealth().ToString();
+        }
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
@@ -43,12 +65,12 @@ public class ThirdPersonMovement : MonoBehaviour
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && isPlayerOnGround)
+        if (Input.GetKeyUp(KeyCode.Space) && isPlayerOnGround) //Jump is not smooth enough yet
         {
             playerJumpVelocity.y += Mathf.Sqrt(jumpHeight * -3f * gravityValue);
         }
 
         playerJumpVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerJumpVelocity * Time.deltaTime);
+        controller.Move(playerJumpVelocity * Time.deltaTime * 2f);
     }
 }
