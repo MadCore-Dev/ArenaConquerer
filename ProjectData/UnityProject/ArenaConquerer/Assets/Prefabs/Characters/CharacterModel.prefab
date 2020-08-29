@@ -484,9 +484,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6974956224696161830}
   - component: {fileID: 2257970834723591195}
+  - component: {fileID: 4463369098985713958}
+  - component: {fileID: 145577040}
+  - component: {fileID: 145577041}
   m_Layer: 0
   m_Name: CharacterModel
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -518,7 +521,7 @@ Animator:
   m_GameObject: {fileID: 6974956224696161829}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 12a3e421f3294dc42944b3d80ca22d4a, type: 2}
+  m_Controller: {fileID: 9100000, guid: c845b8a4e08bb6042bff993115d8dded, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -527,6 +530,54 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4463369098985713958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974956224696161829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6e48a68e440a041940e4bd60494f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!143 &145577040
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974956224696161829}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 0
+  m_Radius: 0.79
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.15, z: 0}
+--- !u!114 &145577041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974956224696161829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af02844c9499c464f8a90f1972814e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 145577040}
+  cam: {fileID: 0}
+  speed: 6
+  turnSmoothDelay: 0.1
+  jumpHeight: 1
+  logText: {fileID: 6974956224048103083}
 --- !u!1 &6974956224750683416
 GameObject:
   m_ObjectHideFlags: 0
