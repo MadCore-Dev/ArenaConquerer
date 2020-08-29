@@ -20,11 +20,11 @@ public class BashPiller : Damage
         transform.DORotate(new Vector3(0, 360, 0), 1f ,RotateMode.FastBeyond360).SetLoops(-1);    
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.transform.tag == "Player")
+        if (other.transform.tag == "Player")
         {
-            DamageToPlayer(damage, collision.transform.GetComponent<Health>());
+            SingleDamageInstance(damage, other.transform.GetComponent<Health>());
         }
     }
 
