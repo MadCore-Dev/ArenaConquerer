@@ -24,10 +24,13 @@ public class ThirdPersonMovement : MonoBehaviour
     [Header("HP REGION")]
     public TextMeshProUGUI logText;
     private Health healthRef;
+
+    Animator anim;
     #endregion
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         healthRef = GetComponent<Health>();
         if (healthRef != null)
         {
@@ -63,11 +66,14 @@ public class ThirdPersonMovement : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
+
         }
+            anim.SetFloat("speed", direction.magnitude);
 
         if (Input.GetKeyUp(KeyCode.Space) && isPlayerOnGround) //Jump is not smooth enough yet
         {
             playerJumpVelocity.y += Mathf.Sqrt(jumpHeight * -3f * gravityValue);
+            anim.SetTrigger("jump");
         }
 
         playerJumpVelocity.y += gravityValue * Time.deltaTime;
