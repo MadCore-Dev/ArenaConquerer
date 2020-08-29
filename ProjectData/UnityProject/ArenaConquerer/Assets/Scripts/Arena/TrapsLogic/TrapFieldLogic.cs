@@ -32,11 +32,11 @@ public class TrapFieldLogic : Damage
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         if (!alwaysAnimating)
         {
-            if (collision.gameObject.tag == tagName) // tagName will be player Tag
+            if (other.gameObject.tag == tagName) // tagName will be player Tag
             {
                 for (int i = 0; i < spikes.Count; i++)
                 {
@@ -44,13 +44,16 @@ public class TrapFieldLogic : Damage
                 }
             }
         }
-        
 
-        if (collision.gameObject.tag == "Player")
+
+        if (other.gameObject.tag == "Player")
         {
-            DamageToPlayer(damage, collision.transform.GetComponent<Health>());
+            //Here set some boolean on player enter for continue dmg (In Future)
+            //So that we can stack effects on player
+            SingleDamageInstance(damage, other.transform.GetComponent<Health>());
         }
     }
+
     /// <summary>
     /// Will Animate once only
     /// </summary>
