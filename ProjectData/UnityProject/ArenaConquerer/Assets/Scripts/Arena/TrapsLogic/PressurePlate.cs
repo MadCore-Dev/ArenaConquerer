@@ -14,16 +14,16 @@ public class PressurePlate : Damage
         PlayPS();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.tag == objectTag)
+        if (other.gameObject.tag == objectTag)
         {
             PlayPS();
         }
 
-        if (collision.transform.tag == "Player")
+        if (other.transform.tag == "Player")
         {
-            DamageToPlayer(damage, collision.transform.GetComponent<Health>());
+            SingleDamageInstance(damage, other.transform.GetComponent<Health>());
         }
     }
 
