@@ -5,9 +5,9 @@ public class Health : MonoBehaviour
     private float remainingHP;
     private float maxHP;
 
-    public float DamageHealth(float amount)
+    public float DamageHealth(float damageAmount)
     {
-        var hp = remainingHP - amount;
+        var hp = remainingHP - damageAmount;
         remainingHP = hp < 0 ? 0f : hp;
         return GetRemainingHealth();
     }
@@ -17,9 +17,9 @@ public class Health : MonoBehaviour
         return Mathf.Ceil(remainingHP);
     }
 
-    public void SetTotalHealth(float HPValue)
+    public float SetTotalHealth(float HPValue)
     {
-        maxHP = remainingHP = HPValue;
+        return maxHP = remainingHP = HPValue;
     }
 
     public float RestoreHealthFull() // For dummies in practice
