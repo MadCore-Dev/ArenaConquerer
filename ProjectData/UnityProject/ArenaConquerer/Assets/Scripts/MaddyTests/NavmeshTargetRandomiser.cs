@@ -59,7 +59,11 @@ public class NavmeshTargetRandomiser : MonoBehaviour
 
     public GameObject GetRandomTarget()
     {
-        GameObject targetDatas = targetData[Random.Range(0, targetData.Count)];
+        GameObject targetDatas = null;
+        if (targetData.Count > 0)
+        { 
+            targetDatas = targetData[Random.Range(0, targetData.Count)]; 
+        }
         targetData.Remove(targetDatas);
         return targetDatas;
     }
