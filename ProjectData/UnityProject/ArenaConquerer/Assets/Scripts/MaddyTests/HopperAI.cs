@@ -1,41 +1,25 @@
-﻿using Microsoft.Win32.SafeHandles;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class HopperAI : BaseAI
 {
     [Min(0.1f)]
     public float hopDistance = 1f;
-    IEnumerator hopper;
+
     protected override void Start()
     {
         base.Start();
         navMeshAgent.updatePosition = false;
-    }
-
-    protected override void onTargetReached()
-    {
-        if(hopper == null)
-        {
-            hopper = Hop(hopDistance);
-            StartCoroutine(hopper);
-        }
-        else
-        {
-            StopCoroutine(hopper);
-        }
+        StartCoroutine(Hop(hopDistance));
     }
 
     protected override void Update()
     {
-        RefreshTarget();
+        RefreshTarget(targetType);
         transform.LookAt(navMeshAgent.nextPosition);
     }
 
-    IEnumerator<float> Hop(float delay)
+    private IEnumerator<float> Hop(float delay)
     {
         float time = 0f;
         while (time < delay)
@@ -47,11 +31,15 @@ public class HopperAI : BaseAI
         StartCoroutine(Hop(delay));
     }
 
-    private void OnDrawGizmos()
+    protected override void OnDrawGizmos()
     {
-        if(navMeshAgent != null)
+        base.OnDrawGizmos();
+        if (debugDetails)
         {
-            Gizmos.DrawSphere(navMeshAgent.nextPosition, 0.5f);
+            if (navMeshAgent != null)
+            {
+                Gizmos.DrawSphere(navMeshAgent.nextPosition, 0.5f);
+            }
         }
     }
 }

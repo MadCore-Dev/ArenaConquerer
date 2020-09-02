@@ -31,6 +31,7 @@ public class NavmeshTargetRandomiser : MonoBehaviour
 
     public List<GameObject> targetData = new List<GameObject>();
     public Transform targetHolder;
+    public GameObject player;
 
     [ContextMenu("SpawnTargets")]
 
@@ -68,6 +69,18 @@ public class NavmeshTargetRandomiser : MonoBehaviour
         return targetDatas;
     }
 
+    public GameObject GetPlayer()
+    {
+        if (player != null)
+        {
+            return player;
+        }
+        else
+        {
+            return GetRandomTarget();
+        }
+    }
+
     public void UseUpTarget(GameObject target)
     {
         foreach (Transform item in targetHolder)
@@ -77,5 +90,11 @@ public class NavmeshTargetRandomiser : MonoBehaviour
                 Destroy(item.gameObject);
             }
         }
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawCube(player.transform.position, Vector3.one);
     }
 }
