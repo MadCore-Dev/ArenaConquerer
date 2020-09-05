@@ -20,6 +20,8 @@ public class ThirdPersonMovement : MonoBehaviour
     private bool isPlayerOnGround;
     private Vector3 playerJumpVelocity;
 
+    private float holdTime = 0f;
+
     #region HP TESTING
     [Header("HP REGION")]
     public TextMeshProUGUI logText;
@@ -41,11 +43,18 @@ public class ThirdPersonMovement : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            holdTime += Time.deltaTime;
+        }
+        Attack();
+
         if (logText.text != healthRef.GetRemainingHealth().ToString())
         {
             //  logText.text = healthRef.DamageHealth(healthRef.GetRemainingHealth() * 0.1f).ToString();
             logText.text = healthRef.GetRemainingHealth().ToString();
         }
+
 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -78,5 +87,21 @@ public class ThirdPersonMovement : MonoBehaviour
 
         playerJumpVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerJumpVelocity * Time.deltaTime * 2f);
+    }
+
+    void Attack()
+    {
+        Debug.Log("HOLD TIME : " + holdTime);
+
+        if (Input.GetKey(KeyCode.Mouse0) && holdTime > 2)
+        {
+            anim.SetTrigger("heavyAttack");
+            holdTime = 0;
+        }
+        if(Input.GetKeyUp(KeyCode.Mouse0) && holdTime < 2)
+        {
+            anim.SetTrigger("lightAttack");
+            holdTime = 0;
+        }
     }
 }
