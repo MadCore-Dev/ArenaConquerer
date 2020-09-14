@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class NavmeshTargetRandomiser : MonoBehaviour
+public class AIManager : MonoBehaviour
 {
     #region Singleton
 
-    private static NavmeshTargetRandomiser _instance;
+    private static AIManager _instance;
 
-    public static NavmeshTargetRandomiser Instance { get { return _instance; } }
+    public static AIManager Instance { get { return _instance; } }
 
 
     private void Awake()
@@ -33,23 +33,23 @@ public class NavmeshTargetRandomiser : MonoBehaviour
     public Transform targetHolder;
     public GameObject player;
 
-    [ContextMenu("SpawnTargets")]
+    [Header("Patroling")]
+    public Transform petrolPathsHolder;
+    public bool debugDetails = true;
+    public Color patrolPointsColor = Color.blue;
+
+   [ContextMenu("SpawnTargets")]
 
     private void Update()
     {
         if (targetHolder.childCount < 5)
         {
-            SpawnTargets();
+            SpwanTargets();
         }
     }
 
-    void SpawnTargets()
+    void SpwanTargets()
     {
-        //foreach (Transform item in targetHolder)
-        //{
-        //    Destroy(item.gameObject);
-        //}
-        //targetData.Clear();
         for (int i = 0; i < targetCounts; i++)
         {
             GameObject temp = Instantiate(targetPrefab, new Vector3(Random.Range(-targetspawnRange.x, targetspawnRange.x), 1, Random.Range(-targetspawnRange.y, targetspawnRange.y)), Quaternion.identity);
@@ -61,6 +61,10 @@ public class NavmeshTargetRandomiser : MonoBehaviour
     public GameObject GetRandomTarget()
     {
         GameObject targetDatas = null;
+        if (targetData.Count < 5)
+        {
+            SpwanTargets();
+        }
         if (targetData.Count > 0)
         { 
             targetDatas = targetData[Random.Range(0, targetData.Count)]; 
@@ -92,9 +96,30 @@ public class NavmeshTargetRandomiser : MonoBehaviour
         }
     }
 
+    public Transform GetRandomPatrolPath()
+    {
+        return petrolPathsHolder.GetChild(Random.Range(0, petrolPathsHolder.childCount));
+    }
+
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawCube(player.transform.position, Vector3.one);
+        Gizmos.color = patrolPointsColor;
+        if (debugDetails)
+        {
+            Gizmos.color = patrolPointsColor;
+            foreach (Transform path in petrolPathsHolder)
+            {
+                for (int i = 0; i < path.childCount; i++)
+                {
+                    if (i < path.childCount - 1)
+                    {
+                        Gizmos.DrawLine(path.GetChild(i).transform.position, path.GetChild(i + 1).transform.position);
+                    }
+                    Gizmos.DrawSphere(path.GetChild(i).transform.position, 0.5f);
+                }
+            }
+        }
     }
 }

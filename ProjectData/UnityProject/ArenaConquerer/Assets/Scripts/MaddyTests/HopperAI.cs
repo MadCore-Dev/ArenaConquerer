@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class HopperAI : BaseAI
 {
+    [Header("Properties")]
     [Min(0.1f)]
     public float hopDistance = 1f;
 

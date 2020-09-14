@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class NavMeshAgents : BaseAI
+public class FollowAI : BaseAI
 {
     protected override void Update()
     {
