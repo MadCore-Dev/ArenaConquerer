@@ -13,6 +13,7 @@ public class CameraType : MonoBehaviour
     [SerializeField] private ThirdPersonCamera TPCamera;
     [SerializeField] private Transform LookTarget;
     [SerializeField] private Transform FollowTarget;
+    [SerializeField] private Transform ArenaPrefab;
 
     private CinemachineFreeLook thirdPersonCamera;
     private const string xAxisInput = "Mouse X";
@@ -21,6 +22,11 @@ public class CameraType : MonoBehaviour
 
     private void Awake()
     {
+        if (!Camera.main.GetComponent<CinemachineBrain>())
+        {
+            Camera.main.gameObject.AddComponent<CinemachineBrain>();
+        }
+        
         thirdPersonCamera = GetComponent<CinemachineFreeLook>();
         ResetAttributes();
         SetCameraAttributes(TPCamera);
@@ -34,8 +40,8 @@ public class CameraType : MonoBehaviour
                 //Do NOTHING FOR NOW
                 break;
             case ThirdPersonCamera.ThirdPersonCameraWithoutFollow:
-                thirdPersonCamera.LookAt = null;
                 thirdPersonCamera.Follow = null;
+                thirdPersonCamera.LookAt = ArenaPrefab;
                 break;
             case ThirdPersonCamera.ThirdPersonCameraWithoutRotation:
                 thirdPersonCamera.m_XAxis.m_InputAxisName = null;
