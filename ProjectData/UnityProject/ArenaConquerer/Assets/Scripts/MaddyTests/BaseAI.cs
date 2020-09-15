@@ -6,9 +6,10 @@ public class BaseAI : MonoBehaviour
 {
     protected NavMeshAgent navMeshAgent;
     protected GameObject target;
-    protected NavmeshTargetRandomiser navmeshTargetRandomiser;
+    protected AIManager aiManager;
 
     public Targeter targetType;
+    public float vision = 2.5f;
     [Header("Debug")]
     public bool debugDetails = false;
     public Color debugColor = Color.red;
@@ -16,23 +17,33 @@ public class BaseAI : MonoBehaviour
     protected virtual void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        navmeshTargetRandomiser = NavmeshTargetRandomiser.Instance;
+        aiManager = AIManager.Instance;
     }
 
     protected virtual void Update() { }
     protected virtual void onTargetReached() { }
     protected virtual void RefreshTarget(Targeter targetType)
     {
-        if (target == null)
+        if (Vector3.Distance(transform.position, aiManager.GetPlayer().transform.position) < vision)
         {
-            onTargetReached();
-            target = SetTarget(targetType);
+            target = SetTarget(Targeter.Player);
         }
-        if (target != null && Vector3.Distance(transform.position, navMeshAgent.destination) < 1f)
+        else
         {
-            navmeshTargetRandomiser.UseUpTarget(target);
-            onTargetReached();
-            target = SetTarget(targetType);
+            if (target == null || target == aiManager.GetPlayer())
+            {
+                onTargetReached();
+                target = SetTarget(targetType);
+            }
+            if (target != null && Vector3.Distance(transform.position, navMeshAgent.destination) < 1f)
+            {
+                if (target != aiManager.GetPlayer())
+                {
+                    aiManager.UseUpTarget(target);
+                }
+                onTargetReached();
+                target = SetTarget(targetType);
+            }
         }
     }
     protected GameObject SetTarget(Targeter targetType, GameObject target = null)
@@ -40,10 +51,10 @@ public class BaseAI : MonoBehaviour
         switch (targetType)
         {
             case Targeter.Player:
-                target = navmeshTargetRandomiser.GetPlayer();
+                target = aiManager.GetPlayer();
                 break;
             case Targeter.Random:
-                target = navmeshTargetRandomiser.GetRandomTarget();
+                target = aiManager.GetRandomTarget();
                 break;
             default:
                 break;
@@ -56,6 +67,10 @@ public class BaseAI : MonoBehaviour
     {
         Gizmos.color = debugColor;
         Handles.color = debugColor;
+        if (debugDetails)
+        {
+            Handles.DrawWireDisc(transform.position, transform.up, vision);
+        }
     }
 }
 public enum Targeter

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Logics : MonoBehaviour
 {
+    public ValueChangedCallback OnValueChanged;
     public void ToggleEffect(Image image)
     {
         if (image)
@@ -13,5 +13,10 @@ public class UI_Logics : MonoBehaviour
             else
                 image.color = Color.white;
         }
+    }
+
+    public void ToggleValue(int value)
+    {
+        OnValueChanged.Invoke(value);
     }
 }
