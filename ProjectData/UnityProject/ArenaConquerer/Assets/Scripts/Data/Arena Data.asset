@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75351408b962a1419dfa1d09ef307a0, type: 3}
+  m_Name: Arena Data
+  m_EditorClassIdentifier: 
+  noOfWaves: 0
+  timePerWave: 0
+  enemyTypes:
+  - typeOfEnemy: 0
+    enabled: 0
+    enemy: {fileID: 1836893378808242196, guid: 0ff0eecd3d203ab41988175bbae66a82, type: 3}
+    count: 0
+  - typeOfEnemy: 1
+    enabled: 0
+    enemy: {fileID: 8226527510332734193, guid: 33d71bb9dd6a8ae43ba0e0bd93868e0b, type: 3}
+    count: 0
+  - typeOfEnemy: 2
+    enabled: 0
+    enemy: {fileID: 688330660504176665, guid: e4292d511f9cafd4d955c006c989b67f, type: 3}
+    count: 0

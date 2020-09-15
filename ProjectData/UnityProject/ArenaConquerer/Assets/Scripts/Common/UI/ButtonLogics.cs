@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ButtonLogics : MonoBehaviour
@@ -8,17 +9,17 @@ public class ButtonLogics : MonoBehaviour
     [SerializeField] private Button decrement;
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private int MaxValue;
-
+    public ValueChangedCallback OnValueChanged; 
     private void Start()
     {
         increment.onClick.AddListener(() =>
         {
-            IncrementValue();
+            OnValueChanged.Invoke(IncrementValue());
         });
 
         decrement.onClick.AddListener(() =>
         {
-            DecrementValue();
+            OnValueChanged.Invoke(DecrementValue());
         });
     }
 
@@ -26,14 +27,15 @@ public class ButtonLogics : MonoBehaviour
     /// Increment
     /// </summary>
     /// <param name="MaxValue">Use this parameter to set max value for that input field</param>
-    public void IncrementValue()
+    public int IncrementValue()
     {
         int value = int.Parse(inputField.text);
         value += 1;
         inputField.text = value.ToString();
+        return value;
     }
 
-    public void DecrementValue()
+    public int DecrementValue()
     {
         int value = int.Parse(inputField.text);
         if (value > 0)
@@ -41,5 +43,6 @@ public class ButtonLogics : MonoBehaviour
             value -= 1;
             inputField.text = value.ToString();
         }
+        return value;
     }
 }

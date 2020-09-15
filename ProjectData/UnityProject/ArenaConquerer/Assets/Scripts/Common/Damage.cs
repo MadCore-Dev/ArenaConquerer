@@ -30,7 +30,7 @@ public class Damage : MonoBehaviour
     /// For damages like Posion or bleeding effects
     /// </summary>
     /// <returns></returns>
-    public IEnumerator ApplyDamageOverTime()
+    public virtual IEnumerator ApplyDamageOverTime()
     {
         yield return null;
     }
