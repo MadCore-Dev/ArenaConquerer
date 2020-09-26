@@ -30,14 +30,24 @@ public class ArenaData : ScriptableObject
     {
         timePerWave = time;
     }
-    public void ToggleEnemyType(int enemyType)
+    public void SetEnemyTypeData(int enemyType, float weight)
     {
         EnemyWaveData enemyData = enemyTypes.Where(e => e.typeOfEnemy == (EnemyType)enemyType).FirstOrDefault();
         if (enemyData != null)
         {
-            enemyData.enabled = !enemyData.enabled;
+            enemyData.weight = weight * 100f;
+            if (weight > 0)
+            {
+                enemyData.enabled = true;
+            }
+            else
+            {
+                enemyData.enabled = false;
+            }
         }
     }
+
+    [ContextMenu("Reset Data")]
     public void Reset()
     {
         noOfWaves = 0;
@@ -45,6 +55,7 @@ public class ArenaData : ScriptableObject
         foreach (EnemyWaveData enemy in enemyTypes)
         {
             enemy.enabled = false;
+            enemy.weight = 0f;
         }
     }
 }
@@ -55,7 +66,7 @@ public class EnemyWaveData
     public EnemyType typeOfEnemy;
     public bool enabled;
     public GameObject enemy;
-    public int count;
+    public float weight;
 }
 
 public enum EnemyType
