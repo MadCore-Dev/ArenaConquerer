@@ -15,9 +15,7 @@ MonoBehaviour:
   targetType: 1
   vision: 4
   debugDetails: 1
-  debugColor: {r: 1, g: 0, b: 0, a: 1}
-  patrolPointsHolder: {fileID: 0}
-  currentTarget: 0
+  debugColor: {r: 1, g: 0, b: 0, a: 0.078431375}
   direction: 1
 --- !u!1001 &4863029321832848598
 PrefabInstance:

@@ -15,7 +15,7 @@ MonoBehaviour:
   targetType: 1
   vision: 7.5
   debugDetails: 1
-  debugColor: {r: 1, g: 0, b: 0, a: 1}
+  debugColor: {r: 1, g: 0, b: 0, a: 0.078431375}
   hopDistance: 2.5
 --- !u!1001 &4097146870003347006
 PrefabInstance:

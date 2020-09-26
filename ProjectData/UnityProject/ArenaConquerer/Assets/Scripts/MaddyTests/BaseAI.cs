@@ -69,7 +69,7 @@ public class BaseAI : MonoBehaviour
         Handles.color = debugColor;
         if (debugDetails)
         {
-            Handles.DrawWireDisc(transform.position, transform.up, vision);
+            Handles.DrawSolidDisc(transform.position, transform.up, vision);
         }
     }
 }
