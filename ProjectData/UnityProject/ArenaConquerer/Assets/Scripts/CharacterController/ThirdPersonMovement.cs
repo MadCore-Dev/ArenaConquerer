@@ -103,5 +103,11 @@ public class ThirdPersonMovement : MonoBehaviour
             anim.SetTrigger("lightAttack");
             holdTime = 0;
         }
+
+        //Defense
+        if(Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            anim.SetTrigger("dodge");
+        }
     }
 }
