@@ -14,16 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noOfWaves: 0
   timePerWave: 0
-  enemyTypes:
+  min: 0
+  max: 0
+  enemyTypesData:
   - typeOfEnemy: 0
     enabled: 0
     enemy: {fileID: 1836893378808242196, guid: 0ff0eecd3d203ab41988175bbae66a82, type: 3}
-    count: 0
+    weight: 0
   - typeOfEnemy: 1
     enabled: 0
     enemy: {fileID: 8226527510332734193, guid: 33d71bb9dd6a8ae43ba0e0bd93868e0b, type: 3}
-    count: 0
+    weight: 0
   - typeOfEnemy: 2
     enabled: 0
     enemy: {fileID: 688330660504176665, guid: e4292d511f9cafd4d955c006c989b67f, type: 3}
-    count: 0
+    weight: 0

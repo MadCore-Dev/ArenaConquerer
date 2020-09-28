@@ -15,7 +15,7 @@ MonoBehaviour:
   targetType: 1
   vision: 4
   debugDetails: 1
-  debugColor: {r: 1, g: 0, b: 0, a: 1}
+  debugColor: {r: 1, g: 0, b: 0, a: 0.078431375}
 --- !u!1001 &6020317343414662363
 PrefabInstance:
   m_ObjectHideFlags: 0

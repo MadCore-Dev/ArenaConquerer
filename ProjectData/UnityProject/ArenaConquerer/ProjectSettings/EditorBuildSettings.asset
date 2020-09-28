@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/_GAME/TrainingArena.unity
     guid: 6e4b262e40adc0e4db9b624679046938
+  - enabled: 1
+    path: Assets/Scenes/AIVariationsTest_AI.unity
+    guid: 07029bb9b77f811489af37336fbd4a6b
   m_configObjects: {}
